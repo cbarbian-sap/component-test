@@ -1,4 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
-namespace: default
-name: test
+metadata:
+  namespace: {{ namespace }}
+  name:  {{ name }}
+data:
+  foo: {{ xxx.bar }}
