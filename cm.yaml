@@ -4,4 +4,4 @@ metadata:
   namespace: {{ namespace }}
   name:  {{ name }}
 data:
-  foo: bar 
+  foo: {{ . | toJson }} 
