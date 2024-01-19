@@ -21,7 +21,6 @@ jobs:
   publish-packagess:
     name: Publish packages 
     runs-on: ubuntu-22.04
-    needs: validate
     permissions:
       contents: read
       packages: write
