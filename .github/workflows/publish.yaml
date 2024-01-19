@@ -10,7 +10,7 @@ env:
   HELM_VERSION: v3.11.3
   SEMVER_VERSION: 3.4.0
   REGISTRY: ghcr.io
-  CHART_DIRECTORY: chart
+  CHART_DIRECTORY: helm
 
 defaults:
   run:
