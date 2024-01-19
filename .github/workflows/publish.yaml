@@ -18,7 +18,7 @@ defaults:
     shell: bash
 
 jobs:
-  publish-packagess:
+  publish-packages:
     name: Publish packages 
     runs-on: ubuntu-22.04
     permissions:
@@ -62,8 +62,8 @@ jobs:
         repository=$REGISTRY/${{ github.repository }}/helm
         tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
 
-  publish-helm-chart:
-    name: Publish to github packages
+  publish-chart:
+    name: Publish chart 
     runs-on: ubuntu-22.04
     permissions:
       contents: read
