@@ -1,0 +1,49 @@
+name: Publish artifacts
+
+on:
+  release:
+    types: [published]
+
+concurrency: release-${{ github.event.release.tag_name }}
+
+env:
+  HELM_VERSION: v3.11.3
+  SEMVER_VERSION: 3.4.0
+  REGISTRY: ghcr.io
+  CHART_DIRECTORY: chart
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish-to-packages:
+    name: Publish to github packages
+    runs-on: ubuntu-22.04
+    needs: validate
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - uses: azure/setup-helm@v3
+      with:
+       version: ${{ env.HELM_VERSION }}
+
+    - name: Create package
+      run: |
+        helm package --version ${{ github.event.release.tag_name }} helm
+
+    - name: Login to the OCI registry
+      run: |
+        helm --registry-config $RUNNER_TEMP/helm-config.json registry login $REGISTRY -u ${{ github.actor }} --password-stdin <<< ${{ github.token }}
+
+    - name: Upload package
+      run: |
+        chart_name=$(yq .name $CHART_DIRECTORY/Chart.yaml)
+        file=$chart_name-${{ github.event.release.tag_name }}.tgz
+        repository=$REGISTRY/${{ github.repository }}/chart
+        helm --registry-config $RUNNER_TEMP/helm-config.json push $file oci://${repository,,}
