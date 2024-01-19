@@ -7,6 +7,7 @@ on:
 concurrency: release-${{ github.event.release.tag_name }}
 
 env:
+  REGCTL_VERSION: v0.4.8
   HELM_VERSION: v3.11.3
   SEMVER_VERSION: 3.4.0
   REGISTRY: ghcr.io
@@ -17,7 +18,52 @@ defaults:
     shell: bash
 
 jobs:
-  publish-to-packages:
+  publish-packagess:
+    name: Publish packages 
+    runs-on: ubuntu-22.04
+    needs: validate
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup regctl
+      uses: regclient/actions/regctl-installer@main
+      with:
+        release: ${{ env.REGCTL_VERSION }}
+        install-dir: ${{ runner.temp }}/bin
+
+    - name: Log in to the registry
+      # regctl-login action is currently broken ...
+      # uses: regclient/actions/regctl-login@main
+      # with:
+      #   registry: ${{ env.REGISTRY }}
+      #   username: ${{ github.actor }}
+      #   password: ${{ github.token }}
+      run: |
+        regctl registry login $REGISTRY --user ${{ github.actor }} --pass-stdin <<< ${{ github.token }}
+
+    - name: Build and push artifact (root)
+      run: |
+        repository=$REGISTRY/${{ github.repository }}/root
+        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
+
+    - name: Build and push artifact (kustomize)
+      run: |
+        cd kustomize
+        repository=$REGISTRY/${{ github.repository }}/kustomize
+        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
+
+    - name: Build and push artifact (helm)
+      run: |
+        cd helm 
+        repository=$REGISTRY/${{ github.repository }}/helm
+        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
+
+  publish-helm-chart:
     name: Publish to github packages
     runs-on: ubuntu-22.04
     permissions:
