@@ -1,0 +1,5 @@
+apiVersion: v2
+name: component-test 
+description: A Helm chart for https://github.com/cbarbian-sap/component-test
+type: application
+version: 0.0.1
