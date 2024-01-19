@@ -4,5 +4,6 @@ metadata:
   namespace: {{ namespace }}
   name:  {{ name }}
 data:
+  type: kustomize
   foo: |
     {{ . | toJson }} 
