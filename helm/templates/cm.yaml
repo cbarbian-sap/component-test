@@ -7,4 +7,4 @@ data:
   type: helm
   foo: |
     {{ .Values | toJson }} 
-  bar: "101"
+  bar: "102"
