@@ -8,3 +8,4 @@ data:
   foo: |
     {{ . | toJson }} 
   bar: "2"
+  substitute: ${var}
