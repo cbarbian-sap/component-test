@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   namespace: {{ namespace }}
   name:  {{ name }}
+  annotations:
+    a1: v1
+    a2: v2
 data:
   type: kustomize
   foo: |
@@ -10,3 +13,4 @@ data:
   bar: "2"
   substitute: ${var}
   serverInfo: {{ kubernetesVersion }}
+  newkey: newval
