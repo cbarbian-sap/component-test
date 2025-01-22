@@ -3,12 +3,6 @@ kind: ConfigMap
 metadata:
   namespace: {{ namespace }}
   name:  {{ name }}
-  annotations:
-    a2: v2
 data:
-  type: kustomize
-  foo: |
-    {{ . | toJson }} 
-  bar: "2"
-  substitute: ${var}
-  serverInfo: {{ kubernetesVersion }}
+  lookup-testing: {{ (mustLookup "v1" "ConfigMap" "testing" "data").data.foo }}
+  localLookup-testing: {{ (mustLocalLookup "v1" "ConfigMap" "testing" "data").data.foo }}
