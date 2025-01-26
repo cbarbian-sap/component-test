@@ -4,4 +4,4 @@ metadata:
   namespace: {{ namespace }}
   name:  {{ name }}
 data:
-  lookup-testing: {{ (mustLookup "v1" "ConfigMap" {{ namespace }} "data").data.foo }}
+  lookup-testing: {{ (mustLookup "v1" "ConfigMap" namespace "data").data.foo }}
