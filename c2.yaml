@@ -1,0 +1,13 @@
+---
+apiVersion: core.cs.sap.com/v1alpha1
+kind: Component
+metadata:
+  namespace: ns2
+  name: test
+spec:
+  missingNamespacesPolicy: DoNotCreate
+  sourceRef:
+    fluxGitRepository:
+      name: component-test
+  path: c2
+  # serviceAccountName: the-admin

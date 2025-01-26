@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  namespace: testing
+  name: component-test
+spec:
+  interval: 30s
+  ref:
+    branch: main
+  url: https://github.com/cbarbian-sap/component-test
