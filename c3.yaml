@@ -8,6 +8,7 @@ spec:
   missingNamespacesPolicy: DoNotCreate
   sourceRef:
     fluxGitRepository:
+      namespace: default
       name: component-test
   path: c3
   # serviceAccountName: the-admin
