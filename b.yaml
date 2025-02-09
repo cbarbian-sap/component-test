@@ -9,4 +9,6 @@ spec:
     fluxGitRepository:
       namespace: default
       name: component-test
+  dependencies:
+  - name: a
   path: b
