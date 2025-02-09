@@ -2,13 +2,11 @@
 apiVersion: core.cs.sap.com/v1alpha1
 kind: Component
 metadata:
-  namespace: ns4
-  name: test
+  namespace: ns
+  name: a
 spec:
-  missingNamespacesPolicy: DoNotCreate
   sourceRef:
     fluxGitRepository:
       namespace: default
       name: component-test
-  path: c4
-  serviceAccountName: the-admin
+  path: a

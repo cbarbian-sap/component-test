@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ namespace }}
+  name:  {{ name }}
+data:
+  lookup-testing: {{ (mustLookup "v1" "ConfigMap" namespace "data").data.foo }}

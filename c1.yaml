@@ -5,6 +5,8 @@ metadata:
   namespace: ns1
   name: test
 spec:
+  name: exploit
+  namespace: ns-privileged
   missingNamespacesPolicy: DoNotCreate
   sourceRef:
     fluxGitRepository:
