@@ -1,9 +1,1 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: {{ namespace }}
-  name:  a
-  annotations:
-    component-operator.cs.sap.com/delete-policy: orphan
-data:
-  foo: bar
+
