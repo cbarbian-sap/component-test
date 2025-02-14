@@ -8,4 +8,4 @@ metadata:
     # component-operator.cs.sap.com/delete-policy: orphan
     component-operator.cs.sap.com/adoption-policy: always
 data:
-  foo: bar
+  foo: {{ .foo }}
