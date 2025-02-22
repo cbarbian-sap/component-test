@@ -10,3 +10,5 @@ spec:
       namespace: default
       name: component-test
   path: a
+  values:
+    foo: bar
