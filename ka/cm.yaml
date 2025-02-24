@@ -5,4 +5,4 @@ metadata:
   namespace: ns
   name:  a
 data:
-  foo: bar2
+  foo: bar
