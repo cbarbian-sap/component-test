@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  namespace: ns
+  name: a
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: component-test
+    namespace: default
+  path: a
+  prune: true
+  interval: 5m
