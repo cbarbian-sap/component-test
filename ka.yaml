@@ -9,6 +9,6 @@ spec:
     kind: GitRepository
     name: component-test
     namespace: default
-  path: a
+  path: ka
   prune: true
   interval: 5m
