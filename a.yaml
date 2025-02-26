@@ -12,3 +12,5 @@ spec:
   path: a
   values:
     foo: bar
+  valuesFrom:
+  - name: a-values
