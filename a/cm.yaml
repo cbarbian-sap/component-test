@@ -6,3 +6,4 @@ metadata:
   name:  a
 data:
   foo: {{ .foo }}
+  other: boo
