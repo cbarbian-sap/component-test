@@ -10,5 +10,5 @@ spec:
         name: test
         command:
         - sleep
-        - "30" 
+        - "15"
       restartPolicy: Never
