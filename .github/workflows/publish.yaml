@@ -1,93 +1,93 @@
-name: Publish artifacts
-
-on:
-  release:
-    types: [published]
-
-concurrency: release-${{ github.event.release.tag_name }}
-
-env:
-  REGCTL_VERSION: v0.4.8
-  HELM_VERSION: v3.11.3
-  SEMVER_VERSION: 3.4.0
-  REGISTRY: ghcr.io
-  CHART_DIRECTORY: helm
-
-defaults:
-  run:
-    shell: bash
-
-jobs:
-  publish-packages:
-    name: Publish packages 
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Setup regctl
-      uses: regclient/actions/regctl-installer@main
-      with:
-        release: ${{ env.REGCTL_VERSION }}
-        install-dir: ${{ runner.temp }}/bin
-
-    - name: Log in to the registry
-      # regctl-login action is currently broken ...
-      # uses: regclient/actions/regctl-login@main
-      # with:
-      #   registry: ${{ env.REGISTRY }}
-      #   username: ${{ github.actor }}
-      #   password: ${{ github.token }}
-      run: |
-        regctl registry login $REGISTRY --user ${{ github.actor }} --pass-stdin <<< ${{ github.token }}
-
-    - name: Build and push artifact (root)
-      run: |
-        repository=$REGISTRY/${{ github.repository }}/root
-        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
-
-    - name: Build and push artifact (kustomize)
-      run: |
-        cd kustomize
-        repository=$REGISTRY/${{ github.repository }}/kustomize
-        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
-
-    - name: Build and push artifact (helm)
-      run: |
-        cd helm 
-        repository=$REGISTRY/${{ github.repository }}/helm
-        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
-
-  publish-chart:
-    name: Publish chart 
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - uses: azure/setup-helm@v3
-      with:
-       version: ${{ env.HELM_VERSION }}
-
-    - name: Create package
-      run: |
-        helm package --version ${{ github.event.release.tag_name }} helm
-
-    - name: Login to the OCI registry
-      run: |
-        helm --registry-config $RUNNER_TEMP/helm-config.json registry login $REGISTRY -u ${{ github.actor }} --password-stdin <<< ${{ github.token }}
-
-    - name: Upload package
-      run: |
-        chart_name=$(yq .name $CHART_DIRECTORY/Chart.yaml)
-        file=$chart_name-${{ github.event.release.tag_name }}.tgz
-        repository=$REGISTRY/${{ github.repository }}/charts
-        helm --registry-config $RUNNER_TEMP/helm-config.json push $file oci://${repository,,}
+#name: Publish artifacts
+#
+#on:
+#  release:
+#    types: [published]
+#
+#concurrency: release-${{ github.event.release.tag_name }}
+#
+#env:
+#  REGCTL_VERSION: v0.4.8
+#  HELM_VERSION: v3.11.3
+#  SEMVER_VERSION: 3.4.0
+#  REGISTRY: ghcr.io
+#  CHART_DIRECTORY: helm
+#
+#defaults:
+#  run:
+#    shell: bash
+#
+#jobs:
+#  publish-packages:
+#    name: Publish packages 
+#    runs-on: ubuntu-22.04
+#    permissions:
+#      contents: read
+#      packages: write
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v4
+#
+#    - name: Setup regctl
+#      uses: regclient/actions/regctl-installer@main
+#      with:
+#        release: ${{ env.REGCTL_VERSION }}
+#        install-dir: ${{ runner.temp }}/bin
+#
+#    - name: Log in to the registry
+#      # regctl-login action is currently broken ...
+#      # uses: regclient/actions/regctl-login@main
+#      # with:
+#      #   registry: ${{ env.REGISTRY }}
+#      #   username: ${{ github.actor }}
+#      #   password: ${{ github.token }}
+#      run: |
+#        regctl registry login $REGISTRY --user ${{ github.actor }} --pass-stdin <<< ${{ github.token }}
+#
+#    - name: Build and push artifact (root)
+#      run: |
+#        repository=$REGISTRY/${{ github.repository }}/root
+#        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
+#
+#    - name: Build and push artifact (kustomize)
+#      run: |
+#        cd kustomize
+#        repository=$REGISTRY/${{ github.repository }}/kustomize
+#        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
+#
+#    - name: Build and push artifact (helm)
+#      run: |
+#        cd helm 
+#        repository=$REGISTRY/${{ github.repository }}/helm
+#        tar cvz * | regctl artifact put -m application/gzip ${repository,,}:${{ github.event.release.tag_name }}
+#
+#  publish-chart:
+#    name: Publish chart 
+#    runs-on: ubuntu-22.04
+#    permissions:
+#      contents: read
+#      packages: write
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v4
+#
+#    - uses: azure/setup-helm@v3
+#      with:
+#       version: ${{ env.HELM_VERSION }}
+#
+#    - name: Create package
+#      run: |
+#        helm package --version ${{ github.event.release.tag_name }} helm
+#
+#    - name: Login to the OCI registry
+#      run: |
+#        helm --registry-config $RUNNER_TEMP/helm-config.json registry login $REGISTRY -u ${{ github.actor }} --password-stdin <<< ${{ github.token }}
+#
+#    - name: Upload package
+#      run: |
+#        chart_name=$(yq .name $CHART_DIRECTORY/Chart.yaml)
+#        file=$chart_name-${{ github.event.release.tag_name }}.tgz
+#        repository=$REGISTRY/${{ github.repository }}/charts
+#        helm --registry-config $RUNNER_TEMP/helm-config.json push $file oci://${repository,,}
