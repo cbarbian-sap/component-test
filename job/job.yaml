@@ -1,14 +1,19 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: batch.cs.sap.com/v1alpha1
+kind: ReactiveJob
 metadata:
   name: test
 spec:
-  template:
+  jobTemplate:
+    metadata:
+      annotations:
+        digest: abc123
     spec:
-      containers:
-      - image: alpine
-        name: test
-        command:
-        - sleep
-        - "15"
-      restartPolicy: Never
+      template:
+        spec:
+          containers:
+          - image: alpine
+            name: test
+            command:
+            - sleep
+            - "2"
+          restartPolicy: Never
