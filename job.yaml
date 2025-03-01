@@ -11,3 +11,4 @@ spec:
   path: job 
   values:
     foo: bar2
+  requeueInterval: 2m
