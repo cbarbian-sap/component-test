@@ -7,7 +7,7 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        digest: "20"
+        digest: "21"
     spec:
       template:
         spec:
