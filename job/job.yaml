@@ -1,3 +1,4 @@
+---
 apiVersion: batch.cs.sap.com/v1alpha1
 kind: ReactiveJob
 metadata:
@@ -17,3 +18,10 @@ spec:
             - sleep
             - "20"
           restartPolicy: Never
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+data:
+  foo: "17"
