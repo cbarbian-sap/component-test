@@ -13,4 +13,4 @@ spec:
   path: job
   prune: true
   interval: 5m
-  wait: true
+  # wait: true
