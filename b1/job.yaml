@@ -1,0 +1,20 @@
+---
+apiVersion: batch.cs.sap.com/v1alpha1
+kind: ReactiveJob
+metadata:
+  name: b1
+spec:
+  jobTemplate:
+    metadata:
+      annotations:
+        sha: "540a9f1b6b12e38f687d1bcee46edcec7c285a7a"
+    spec:
+      template:
+        spec:
+          containers:
+          - image: alpine
+            name: test
+            command:
+            - sleep
+            - "300"
+          restartPolicy: Never
