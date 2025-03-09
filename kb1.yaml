@@ -10,6 +10,6 @@ spec:
   targetNamespace: default
   path: b1
   prune: true
-  interval: 5m
-  timeout: 3m
+  interval: 30m
+  timeout: 5m
   wait: true
