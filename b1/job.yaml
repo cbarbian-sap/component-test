@@ -7,7 +7,7 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        sha: "b029962c8ee89bc15ecc1ec3e0d469aa0f69502a"
+        sha: "503ad298c252a1b0e4581d97d9e49f1b851e857b"
     spec:
       template:
         spec:
@@ -16,5 +16,5 @@ spec:
             name: test
             command:
             - sleep
-            - "120"
+            - "1800"
           restartPolicy: Never
