@@ -7,7 +7,7 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        sha: "e1737714d47527324fea97c0201a6dffcd3f3cad"
+        sha: "74c3828816e225ec6df8396d9dc41aa4f6a10484"
     spec:
       backoffLimit: 1 
       template:
@@ -19,4 +19,4 @@ spec:
             - sleep
             - "1800"
           restartPolicy: Never
-          terminationPeriodGraceSeconds: 5
+          terminationGracePeriodSeconds: 5
