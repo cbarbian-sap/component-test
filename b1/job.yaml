@@ -7,7 +7,7 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        sha: "bfd78f5f9de0a63def7c88f0d56b8eb2cf56d783"
+        sha: "13f0d58559aa750f2adfdacfce77e92537689a24"
     spec:
       backoffLimit: 1 
       template:
@@ -17,6 +17,6 @@ spec:
             name: test
             command:
             - sleep
-            - "300"
+            - "90"
           restartPolicy: Never
           terminationGracePeriodSeconds: 5
