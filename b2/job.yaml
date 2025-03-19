@@ -7,8 +7,12 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        sha: "e4efb5c79a5fe1531857c6a19bfac26ec89e74a5"
+        sha: "18205dbcf3d3be02ca055e474bcd41e22222d0b8"
+        {{- if .foo }}
+        foo:  {{ .foo }}
+        {{- end }}
     spec:
+      backoffLimit: 1
       template:
         spec:
           containers:
@@ -18,3 +22,4 @@ spec:
             - sleep
             - "150"
           restartPolicy: Never
+          terminationGracePeriodSeconds: 5
