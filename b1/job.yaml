@@ -7,7 +7,7 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        sha: "0b8dfa52bfec8541fdb527c437ce1fae655f8261"
+        sha: "9920a3c9bf7a47ef63408fd6cd2fedb85cfeaabb"
         {{- if .foo }}
         foo:  {{ .foo }}
         {{- end }}
