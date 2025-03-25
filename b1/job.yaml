@@ -7,7 +7,7 @@ spec:
   jobTemplate:
     metadata:
       annotations:
-        sha: "3d3d83c4c0a1494178caee75a6750f7a47671d88"
+        sha: "30ced42efa6bbc44a8dd0da4ea9ce4e6f57ea0ad"
         {{- if .foo }}
         foo:  {{ .foo }}
         {{- end }}
@@ -20,6 +20,6 @@ spec:
             name: test
             command:
             - sleep
-            - "60"
+            - "150"
           restartPolicy: Never
           terminationGracePeriodSeconds: 5
