@@ -9,4 +9,8 @@ spec:
     fluxGitRepository:
       name: component-test
   path: b2 
-  requeueInterval: 10m
+  requeueInterval: 20m
+  timeout: 100s
+  # sticky: true
+  dependencies:
+  - name: b1
