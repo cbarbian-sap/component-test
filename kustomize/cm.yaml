@@ -3,5 +3,7 @@ kind: ConfigMap
 metadata:
   namespace: {{ namespace }}-2
   name:  {{ name }}
+  annotations:
+    component-operator.cs.sap.com/reapply-interval: "5m"
 data:
-  a: b
+  a: bdevops-knowledge-vectorizer
