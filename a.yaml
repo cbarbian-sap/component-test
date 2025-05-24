@@ -2,7 +2,7 @@
 apiVersion: core.cs.sap.com/v1alpha1
 kind: Component
 metadata:
-  namespace: ns
+  namespace: default
   name: a
 spec:
   sourceRef:
