@@ -5,7 +5,7 @@ metadata:
   namespace: {{ namespace }}
   name:  a
   annotations:
-    component-operator.cs.sap.com/reconcile-policy: once
+    # component-operator.cs.sap.com/reconcile-policy: once
     component-operator.cs.sap.com/update-policy: recreate
     component-operator.cs.sap.com/reapply-interval: 1m
 data:

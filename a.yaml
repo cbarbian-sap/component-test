@@ -5,6 +5,7 @@ metadata:
   namespace: default
   name: a
 spec:
+  requeueInterval: 1m
   sourceRef:
     fluxGitRepository:
       namespace: default
