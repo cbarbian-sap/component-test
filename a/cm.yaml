@@ -4,6 +4,8 @@ kind: ConfigMap
 metadata:
   namespace: {{ namespace }}
   name:  a
+  annotations:
+    component-operator.cs.sap.com/reconcile-policy: once
+    component-operator.cs.sap.com/update-policy: recreate
 data:
-  foo: '{{ (readFile "other.yaml" | toString | fromYaml ).x | toString }}'
-  other: boo
+  foo: bar 
