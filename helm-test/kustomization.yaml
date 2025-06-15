@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configurations:
+- ".kustomize-config.yaml"
+secretGenerator:
+- namespace: testing
+  name: nginx-values
+  behavior: create
+  files:
+  - configurations/nginx-values.yaml
+resources:
+- resources/source.toolkit.fluxcd.io/helmrepository/testing/bitnami.yaml
+- resources/source.toolkit.fluxcd.io/helmchart/testing/nginx.yaml
+- resources/core.cs.sap.com/component/testing/nginx.yaml

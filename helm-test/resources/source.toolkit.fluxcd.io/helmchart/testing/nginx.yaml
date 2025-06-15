@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: nginx
+spec:
+  chart: nginx
+  interval: 1m0s
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: bitnami
+  version: 20.1.0

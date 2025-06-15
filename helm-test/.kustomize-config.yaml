@@ -1,0 +1,13 @@
+---
+nameReference:
+- kind: Secret
+  version: v1
+  fieldSpecs:
+  - group: helm.toolkit.fluxcd.io
+    version: v2
+    kind: HelmRelease
+    path: spec/valuesFrom[]/name
+  - group: core.cs.sap.com
+    version: v1alpha1
+    kind: Component
+    path: spec/valuesFrom[]/name

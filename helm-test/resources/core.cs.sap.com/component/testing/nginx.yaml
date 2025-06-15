@@ -1,0 +1,14 @@
+---
+apiVersion: core.cs.sap.com/v1alpha1
+kind: Component
+metadata:
+  name: nginx
+spec:
+  requeueInterval: 5m
+  sourceRef:
+    fluxHelmChart:
+      name: nginx
+  path: nginx
+  valuesFrom:
+  - name: nginx-values
+    key: nginx-values.yaml
