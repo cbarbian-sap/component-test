@@ -1,0 +1,1 @@
+foo: '{% (mustLookup "v1" "ConfigMap" namespace "config").data.foo %}'
