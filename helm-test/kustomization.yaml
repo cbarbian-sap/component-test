@@ -4,8 +4,7 @@ kind: Kustomization
 configurations:
 - ".kustomize-config.yaml"
 secretGenerator:
-- namespace: testing
-  name: nginx-values
+- name: nginx-values
   behavior: create
   files:
   - configurations/nginx-values.yaml
