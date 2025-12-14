@@ -1,0 +1,4 @@
+includedFiles:
+- ../version.yaml
+includedKustomizations:
+- ../bases
