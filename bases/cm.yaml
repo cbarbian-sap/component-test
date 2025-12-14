@@ -4,3 +4,4 @@ metadata:
   name: base
 data:
   foo: bar
+  version: '{{ (readFile "../version.yaml" | toString | fromYaml).version }}'
