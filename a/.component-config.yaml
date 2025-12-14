@@ -1,4 +1,6 @@
 includedFiles:
 - ../version.yaml
+- xxx.yaml
 includedKustomizations:
 - ../bases
+- xxx
