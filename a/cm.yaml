@@ -5,3 +5,4 @@ metadata:
   name:  a
 data:
   foo: boo
+  version: version: '{{ (readFile "../version.yaml" | fromYAML).version }}'
