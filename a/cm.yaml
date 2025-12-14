@@ -5,4 +5,4 @@ metadata:
   name:  a
 data:
   foo: boo
-  version: version: '{{ (readFile "../version.yaml" | toString | fromYaml).version }}'
+  version: '{{ (readFile "../version.yaml" | toString | fromYaml).version }}'
