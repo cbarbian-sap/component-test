@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - ../bases
 - cm.yaml
+- xxx/cm.yaml
