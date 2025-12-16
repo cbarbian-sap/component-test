@@ -1,2 +1,4 @@
 includedFiles:
 - ../version.yaml
+includedKustomizations:
+- ../b
