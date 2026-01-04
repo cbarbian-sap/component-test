@@ -2,5 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: test-{{ componentRevision }}
-  component-operator.cs.sap.com/delete-policy: orphan-on-apply
+  annotations:
+    component-operator.cs.sap.com/delete-policy: orphan-on-apply
 data: {}
