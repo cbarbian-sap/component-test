@@ -4,5 +4,4 @@ kind: ConfigMap
 metadata:
   name:  a
 data:
-  foo: boo
-  version: '{{ (readFile "../version.yaml" | toString | fromYaml).version }}'
+  revison: "{{ componentRevision }}"
