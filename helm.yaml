@@ -1,0 +1,13 @@
+---
+apiVersion: core.cs.sap.com/v1alpha1
+kind: Component
+metadata:
+  namespace: default
+  name: h
+spec:
+  requeueInterval: 1m
+  sourceRef:
+    fluxGitRepository:
+      namespace: default
+      name: component-test
+  path: helm 
