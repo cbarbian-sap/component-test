@@ -30,3 +30,19 @@ metadata:
   name:  {{ .Release.Name }}-post-upgrade
   annotations:
     helm.sh/hook: post-upgrade
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name:  {{ .Release.Name }}-pre-install-upgrade
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name:  {{ .Release.Name }}-post-install-upgrade
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
