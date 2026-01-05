@@ -5,6 +5,6 @@ metadata:
   name:  {{ .Release.Name }}
 data:
   type: helm
-  foo: |
+  values: |
     {{ .Values | toJson }} 
-  bar: "103"
+  revision: "{{ .Release.Revision }}"
