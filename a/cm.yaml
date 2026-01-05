@@ -4,4 +4,4 @@ kind: ConfigMap
 metadata:
   name:  a
 data:
-  revison: "{{ componentRevision }}"
+  revison: foo
