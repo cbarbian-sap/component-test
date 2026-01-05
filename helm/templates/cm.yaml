@@ -8,3 +8,5 @@ data:
   values: |
     {{ .Values | toJson }} 
   revision: "{{ .Release.Revision }}"
+  isInstall: "{{ .Release.IsInstall }}"
+  isUpgrade: "{{ .Release.IsUpgrade }}"
