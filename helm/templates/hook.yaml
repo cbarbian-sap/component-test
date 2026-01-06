@@ -46,3 +46,12 @@ metadata:
   name:  {{ .Release.Name }}-post-install-upgrade
   annotations:
     helm.sh/hook: post-install,post-upgrade
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name:  {{ .Release.Name }}-post-install-d
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded

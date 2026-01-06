@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   namespace: {{ .Release.Namespace }}
   name:  {{ .Release.Name }}
+  annotations:
+    helm.sh/resource-policy: keep
 data:
   type: helm
   values: |
