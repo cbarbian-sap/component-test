@@ -6,6 +6,7 @@ metadata:
   name: x 
 spec:
   requeueInterval: 1m
+  reapplyInterval: 1m
   sourceRef:
     fluxGitRepository:
       namespace: default
