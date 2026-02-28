@@ -1,0 +1,14 @@
+---
+apiVersion: core.cs.sap.com/v1alpha1
+kind: Component
+metadata:
+  namespace: default
+  name: y
+spec:
+  requeueInterval: 1m
+  reapplyInterval: 1m
+  sourceRef:
+    fluxGitRepository:
+      namespace: default
+      name: component-test
+  path: y

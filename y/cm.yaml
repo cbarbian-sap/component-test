@@ -1,0 +1,32 @@
+{% $revision := 1 %}
+---
+{%- $cm := lookup "v1" "ConfigMap" namespace "revision" %}
+{%- if $cm %}
+{%- $revision = $cm.data.revision | atoi %}
+{%- $componentDigest := $cm.data.componentDigest %}
+{%- if ne componentDigest $componentDigest %}
+{%- $revision = $revision | add1 %}
+{%- $componentDigest = componentDigest %}
+{%- end %}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: revision
+  resourceVersion: "{% $cm.metadata.resourceVersion %}"
+data:
+  revision: "{% $revision %}"
+  componentDigest: "{% $componentDigest %}"
+{%- else %}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: revision
+data:
+  revision: "{% $revision %}"
+  componentDigest: "{% componentDigest %}"
+{%- end %}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: y-{% $revision %}
