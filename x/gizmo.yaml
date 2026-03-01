@@ -3,4 +3,4 @@ kind: Gizmo
 metadata:
   name: test
   labels:
-    test.me/foo: true
+    test.me/foo: "true"
