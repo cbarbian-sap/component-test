@@ -1,0 +1,6 @@
+apiVersion: stable.example.com/v1
+kind: Gizmo
+metadata:
+  name: test
+  labels:
+    test.me/foo: true
