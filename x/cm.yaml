@@ -4,4 +4,6 @@ metadata:
   name: x-{{ componentRevision }}
   annotations:
     component-operator.cs.sap.com/delete-policy: orphan-on-apply
+  labels:
+    test.me/boolean: true
 data: {}
