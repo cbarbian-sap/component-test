@@ -1,10 +1,10 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: x-{{ componentRevision }}
-  annotations:
-    component-operator.cs.sap.com/apply-order: "1"
-    component-operator.cs.sap.com/delete-policy: orphan-on-apply
-  labels:
-    delete-protection.cs.sap.com/enabled: true
-data: {}
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: x-{{ componentRevision }}
+#  annotations:
+#    component-operator.cs.sap.com/apply-order: "1"
+#    component-operator.cs.sap.com/delete-policy: orphan-on-apply
+#  labels:
+#    delete-protection.cs.sap.com/enabled: true
+#data: {}
