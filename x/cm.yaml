@@ -5,5 +5,5 @@ metadata:
   annotations:
     component-operator.cs.sap.com/delete-policy: orphan-on-apply
   labels:
-    delete-protection.cs.sap.com/enabled: "true"
+    delete-protection.cs.sap.com/enabled: true
 data: {}

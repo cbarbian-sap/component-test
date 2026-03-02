@@ -1,0 +1,7 @@
+apiVersion: stable.example.com/V1
+kind: Gizmo
+metadata:
+  name: gizmo
+  labels:
+    delete-protection.cs.sap.com/enabled: true
+  
