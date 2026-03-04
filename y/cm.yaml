@@ -21,7 +21,7 @@ metadata:
   resourceVersion: "{% $cm.metadata.resourceVersion %}"
 data:
   revision: "{% $revision %}"
-  digests: |
+  digests: |-
     {%- $digests | nindent 4 %}
 {%- else %}
 apiVersion: v1
@@ -30,7 +30,7 @@ metadata:
   name: revision
 data:
   revision: "{% $revision %}"
-  digests: |
+  digests: |-
     {%- $digests | nindent 4 %}
 {%- end %}
 ---
