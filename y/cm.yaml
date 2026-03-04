@@ -2,7 +2,7 @@
 {{- if not $hanaInstanceId }}
 {{- $hanaInstanceId := (mustLookup "services.cloud.sap.com/v1" "ServiceInstance" namespace (printf "hana-db-%s" .appName)).status.instanceID }}
 {{- end }}
-{{- $aicoreDeploymentId := (mustLookup "aicore.crossplane.cs.sap.com/v1alpha1" "DeploymentClaim" namespace  printf "%s--%s" namespace .aicoreModelName)).status.deploymentId }}
+{{- $aicoreDeploymentId := (mustLookup "aicore.crossplane.cs.sap.com/v1alpha1" "DeploymentClaim" namespace  printf "%s--%s" namespace .aicoreModelName).status.deploymentId }}
 {{ $revision := 1 }}
 {{ $digests := map "componentDigest" componentDigest "hanaInstanceId" $hanaInstanceId "aicoreDeploymentId" aicoreDeploymentId | toPrettyJson }}
 ---
