@@ -1,12 +1,16 @@
+{{- $hanaInstanceId := .hanaInstanceId }}
+{{- if not $hanaInstanceId }}
+{{- $hanaInstanceId := (mustLookup "services.cloud.sap.com/v1" "ServiceInstance" namespace (printf "hana-db-%s" .appName)).status.instanceID }}
+{{- end }}
+{{- $aicoreDeploymentId := (mustLookup "aicore.crossplane.cs.sap.com/v1alpha1" "DeploymentClaim" namespace  printf "%s--%s" namespace .aicoreModelName)).status.deploymentId }}
 {{ $revision := 1 }}
+{{ $digests := map "componentDigest" componentDigest "hanaInstanceId" $hanaInstanceId "aicoreDeploymentId" aicoreDeploymentId | toPrettyJson }}
 ---
 {{- $cm := lookup "v1" "ConfigMap" namespace "revision" }}
 {{- if $cm }}
 {{- $revision = $cm.data.revision | atoi }}
-{{- $componentDigest := $cm.data.componentDigest }}
-{{- if ne componentDigest $componentDigest }}
+{{- if ne $digests $cm.data.digests }}
 {{- $revision = $revision | add1 }}
-{{- $componentDigest = componentDigest }}
 {{- end }}
 apiVersion: v1
 kind: ConfigMap
@@ -15,7 +19,7 @@ metadata:
   resourceVersion: "{{ $cm.metadata.resourceVersion }}"
 data:
   revision: "{{ $revision }}"
-  componentDigest: "{{ $componentDigest }}"
+  digests: "{{ $digests }}"
 {{- else }}
 apiVersion: v1
 kind: ConfigMap
@@ -23,7 +27,7 @@ metadata:
   name: revision
 data:
   revision: "{{ $revision }}"
-  componentDigest: "{{ componentDigest }}"
+  digests: "{{ $digests }}"
 {{- end }}
 ---
 apiVersion: v1
