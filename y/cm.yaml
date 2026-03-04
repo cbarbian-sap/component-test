@@ -1,6 +1,6 @@
 {%- $hanaInstanceId := .hanaInstanceId %}
 {%- if not $hanaInstanceId %}
-{%- $hanaInstanceId := (mustLookup "v1" "ConfigMap" namespace (printf "hana-db-%s" .appName)).data.instanceID %}
+{%- $hanaInstanceId = (mustLookup "v1" "ConfigMap" namespace (printf "hana-db-%s" .appName)).data.instanceID %}
 {%- end %}
 {%- $aicoreDeploymentId := (mustLookup "v1" "ConfigMap" namespace (printf "%s--%s" namespace .aicoreModelName)).data.deploymentId %}
 # TODO: considering componentDigest might not be enough; we should consider in addition all data 
