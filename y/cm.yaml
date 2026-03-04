@@ -6,7 +6,7 @@
 # TODO: considering componentDigest might not be enough; we should consider in addition all data 
 # retrieved from the cluster by lookup/mustLookup (at least if these data could change)
 {% $revision := 1 %}
-{% $digests := map "componentDigest" componentDigest "hanaInstanceId" $hanaInstanceId "aicoreDeploymentId" aicoreDeploymentId | toPrettyJson %}
+{% $digests := dict "componentDigest" componentDigest "hanaInstanceId" $hanaInstanceId "aicoreDeploymentId" aicoreDeploymentId | toPrettyJson %}
 ---
 {%- $cm := lookup "v1" "ConfigMap" namespace "revision" %}
 {%- if $cm %}
