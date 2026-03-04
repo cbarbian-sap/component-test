@@ -12,3 +12,8 @@ spec:
       namespace: default
       name: component-test
   path: "y"
+  values:
+    appName: myapp
+    # hanaInstanceId: hid
+    aicoreModelName: gpt-5
+    
