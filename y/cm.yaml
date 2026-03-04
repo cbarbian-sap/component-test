@@ -21,7 +21,8 @@ metadata:
   resourceVersion: "{% $cm.metadata.resourceVersion %}"
 data:
   revision: "{% $revision %}"
-  digests: "{% $digests %}"
+  digests: |
+    {%- $digests | nindent 4 %}
 {%- else %}
 apiVersion: v1
 kind: ConfigMap
@@ -29,7 +30,8 @@ metadata:
   name: revision
 data:
   revision: "{% $revision %}"
-  digests: "{% $digests %}"
+  digests: |
+    {%- $digests | nindent 4 %}
 {%- end %}
 ---
 apiVersion: v1
