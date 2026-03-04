@@ -1,8 +1,8 @@
 {%- $hanaInstanceId := .hanaInstanceId %}
 {%- if not $hanaInstanceId %}
-{%- $hanaInstanceId := (mustLookup "services.cloud.sap.com/v1" "ServiceInstance" namespace (printf "hana-db-%s" .appName)).status.instanceID %}
+{%- $hanaInstanceId := (mustLookup "v1" "ConfigMap" namespace (printf "hana-db-%s" .appName)).data.instanceID %}
 {%- end %}
-{%- $aicoreDeploymentId := (mustLookup "aicore.crossplane.cs.sap.com/v1alpha1" "DeploymentClaim" namespace (printf "%s--%s" namespace .aicoreModelName)).status.deploymentId %}
+{%- $aicoreDeploymentId := (mustLookup "v1" "ConfigMap" namespace (printf "%s--%s" namespace .aicoreModelName)).data.deploymentId %}
 # TODO: considering componentDigest might not be enough; we should consider in addition all data 
 # retrieved from the cluster by lookup/mustLookup (at least if these data could change)
 {% $revision := 1 %}
