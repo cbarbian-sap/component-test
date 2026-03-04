@@ -1,36 +1,38 @@
-{{- $hanaInstanceId := .hanaInstanceId }}
-{{- if not $hanaInstanceId }}
-{{- $hanaInstanceId := (mustLookup "services.cloud.sap.com/v1" "ServiceInstance" namespace (printf "hana-db-%s" .appName)).status.instanceID }}
-{{- end }}
-{{- $aicoreDeploymentId := (mustLookup "aicore.crossplane.cs.sap.com/v1alpha1" "DeploymentClaim" namespace  printf "%s--%s" namespace .aicoreModelName).status.deploymentId }}
-{{ $revision := 1 }}
-{{ $digests := map "componentDigest" componentDigest "hanaInstanceId" $hanaInstanceId "aicoreDeploymentId" aicoreDeploymentId | toPrettyJson }}
+{%- $hanaInstanceId := .hanaInstanceId %}
+{%- if not $hanaInstanceId %}
+{%- $hanaInstanceId := (mustLookup "services.cloud.sap.com/v1" "ServiceInstance" namespace (printf "hana-db-%s" .appName)).status.instanceID %}
+{%- end %}
+{%- $aicoreDeploymentId := (mustLookup "aicore.crossplane.cs.sap.com/v1alpha1" "DeploymentClaim" namespace (printf "%s--%s" namespace .aicoreModelName)).status.deploymentId %}
+# TODO: considering componentDigest might not be enough; we should consider in addition all data 
+# retrieved from the cluster by lookup/mustLookup (at least if these data could change)
+{% $revision := 1 %}
+{% $digests := map "componentDigest" componentDigest "hanaInstanceId" $hanaInstanceId "aicoreDeploymentId" aicoreDeploymentId | toPrettyJson %}
 ---
-{{- $cm := lookup "v1" "ConfigMap" namespace "revision" }}
-{{- if $cm }}
-{{- $revision = $cm.data.revision | atoi }}
-{{- if ne $digests $cm.data.digests }}
-{{- $revision = $revision | add1 }}
-{{- end }}
+{%- $cm := lookup "v1" "ConfigMap" namespace "revision" %}
+{%- if $cm %}
+{%- $revision = $cm.data.revision | atoi %}
+{%- if ne $digests $cm.data.digests %}
+{%- $revision = $revision | add1 %}
+{%- end %}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: revision
-  resourceVersion: "{{ $cm.metadata.resourceVersion }}"
+  resourceVersion: "{% $cm.metadata.resourceVersion %}"
 data:
-  revision: "{{ $revision }}"
-  digests: "{{ $digests }}"
-{{- else }}
+  revision: "{% $revision %}"
+  digests: "{% $digests %}"
+{%- else %}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: revision
 data:
-  revision: "{{ $revision }}"
-  digests: "{{ $digests }}"
-{{- end }}
+  revision: "{% $revision %}"
+  digests: "{% $digests %}"
+{%- end %}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: y-{{ $revision }}
+  name: y-{% $revision %}
