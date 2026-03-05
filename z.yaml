@@ -3,7 +3,7 @@ apiVersion: core.cs.sap.com/v1alpha1
 kind: Component
 metadata:
   namespace: default
-  name: "y"
+  name: "z"
 spec:
   requeueInterval: 1m
   reapplyInterval: 1m
@@ -11,7 +11,7 @@ spec:
     fluxGitRepository:
       namespace: default
       name: component-test
-  path: "y"
+  path: "z"
   values:
     appName: myapp
     hanaInstanceId: hid-only
