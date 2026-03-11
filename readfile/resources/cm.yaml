@@ -4,4 +4,6 @@ kind: ConfigMap
 metadata:
   name:  a
 data:
-  foo: "{{ (readFile "../versions.yaml" | toString | fromYaml).foo }}"
+  foo1: "{{ (readFile "../versions.yaml" | toString | fromYaml).foo }}"
+  foo2: "{{ (readFile "../../versions.yaml" | toString | fromYaml).foo }}"
+  foo2: "{{ (readFile "../../../versions.yaml" | toString | fromYaml).foo }}"

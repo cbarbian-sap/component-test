@@ -1,2 +1,4 @@
 includedFiles:
 - ../versions.yaml
+- ../../versions.yaml
+- ../../../versions.yaml
