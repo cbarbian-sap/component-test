@@ -3,3 +3,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name:  p
+data:
+  foo11: "${foo11}"
+  foo12: "${foo12}"
+  foo21: "${foo21}"
+  foo22: "${foo22}"

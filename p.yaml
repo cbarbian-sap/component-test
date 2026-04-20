@@ -11,3 +11,13 @@ spec:
       namespace: default
       name: component-test
   path: p
+  postBuild:
+    substitute:
+      foo11: bar11
+    substituteFrom:
+    - name: subst-old
+  postRenderers:
+  - substitute:
+      foo21: bar21
+    substituteFrom:
+    - name: subst-new
