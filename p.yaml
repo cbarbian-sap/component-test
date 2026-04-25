@@ -16,8 +16,15 @@ spec:
       foo11: bar11
     substituteFrom:
     - name: subst-old
-  postRenderers:
-  - substitute:
-      foo21: bar21
-    substituteFrom:
-    - name: subst-new
+    patches:
+    - target:
+        version: v1
+        kind: ConfigMap
+        name: p
+      patch: |-
+        kind: ConfigMap
+        metadata:
+          name: "*"
+        data:
+          foo22: boo22
+
