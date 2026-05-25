@@ -4,4 +4,4 @@ metadata:
   name: echo
 data:
   spec: |-
-    {{- component.Spec.Values | toString | nindent 4 }}
+    {{- component.Spec.Values.Raw | toString | nindent 4 }}
