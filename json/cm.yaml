@@ -7,3 +7,4 @@ data:
     {{- component.Spec.Values.Raw | toString | nindent 4 }}
   valuesJson: |-
     {{- component.Spec.Values | toJson | nindent 4 }}
+  valuesJsonHash: {{- component.Spec.Values | toJson | sha256sum }}
