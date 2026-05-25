@@ -4,4 +4,4 @@ metadata:
   name: echo
 data:
   component: |-
-    {{ component | toYaml | nindent 4 }}
+    {{- component | toYaml | nindent 4 }}
