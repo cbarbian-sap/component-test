@@ -11,3 +11,6 @@ spec:
       namespace: default
       name: component-test
   path: json 
+  values:
+    foo: bar
+    boo: baz
