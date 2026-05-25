@@ -3,5 +3,7 @@ kind: ConfigMap
 metadata:
   name: echo
 data:
-  spec: |-
+  values: |-
     {{- component.Spec.Values.Raw | toString | nindent 4 }}
+  valuesJson: |-
+    {{- component.Spec.Values | toJson | nindent 4 }}
